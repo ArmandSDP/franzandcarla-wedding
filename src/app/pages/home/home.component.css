@@ -1,0 +1,28 @@
+.rsvp-container {
+  max-width: 400px;
+  margin: auto;
+  padding: 20px;
+  text-align: center;
+}
+
+input, button {
+  width: 100%;
+  padding: 10px;
+  margin: 5px 0;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  background: #eee;
+  border-radius: 5px;
+}
+
+li {
+  padding: 10px;
+  cursor: pointer;
+}
+
+li:hover {
+  background: #ddd;
+}

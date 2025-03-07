@@ -1,0 +1,105 @@
+<div class="container mt-5 mb-5">
+  <div class="row justify-content-center">
+    <div class="">
+      <div class="card shadow p-4">
+        <h2 class="text-center mb-4">RSVP for Franz & Carla's Wedding</h2>
+
+        <form (ngSubmit)="submitRsvp()">
+          <!-- RSVP Yes/No -->
+          <div class="mb-3">
+            <label class="form-label d-block">Will you attend?</label>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="rsvp"
+                [(ngModel)]="rsvpStatus"
+                value="yes"
+              />
+              <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="rsvp"
+                [(ngModel)]="rsvpStatus"
+                value="no"
+              />
+              <label class="form-check-label">No</label>
+            </div>
+          </div>
+
+          <!-- Name Input with Auto-Suggestions (ONLY If RSVP is "Yes") -->
+          <div class="mb-3" *ngIf="rsvpStatus === 'yes'">
+            <label for="name" class="form-label">Enter Your Name:</label>
+            <input
+              id="name"
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              [ngModelOptions]="{ standalone: true }"
+              (input)="filterNames()"
+              placeholder="Start typing..."
+            />
+            <ul class="list-group mt-2" *ngIf="filteredNames.length > 0">
+              <li
+                class="list-group-item list-group-item-action"
+                *ngFor="let suggestion of filteredNames"
+                (click)="selectName(suggestion)"
+              >
+                {{ suggestion }}
+              </li>
+            </ul>
+
+            <!-- Show warning if the name has already RSVP’d -->
+            <p class="text-danger mt-2" *ngIf="hasAlreadyRsvped()">
+              You have already submitted an RSVP.
+            </p>
+          </div>
+
+          <!-- Accommodation Question (Only if RSVP is Yes, Name is Entered, AND Name is Not Already RSVP’d) -->
+          <div
+            class="mb-3"
+            *ngIf="rsvpStatus === 'yes' && isNameValid() && !hasAlreadyRsvped()"
+          >
+            <label class="form-label d-block"
+              >Will you be staying at the venue?</label
+            >
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="stay"
+                [(ngModel)]="stayingOver"
+                value="yes"
+              />
+              <label class="form-check-label">Yes</label>
+            </div>
+            <div class="form-check form-check-inline">
+              <input
+                class="form-check-input"
+                type="radio"
+                name="stay"
+                [(ngModel)]="stayingOver"
+                value="no"
+              />
+              <label class="form-check-label">No</label>
+            </div>
+          </div>
+
+          <!-- Submit Button (Only Enabled When Name Matches List AND Accommodation is Selected) -->
+          <div class="d-grid">
+            <button
+              class="btn btn-primary"
+              type="submit"
+              [disabled]="!isFormValid()"
+            >
+              Submit RSVP
+            </button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>

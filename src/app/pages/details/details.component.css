@@ -1,0 +1,16 @@
+.details-section {
+  background: #f8f9fa;
+  padding: 4rem 0;
+  text-align: center;
+
+  h2 {
+    color: #333;
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+  }
+
+  p {
+    font-size: 1.2rem;
+    color: #555;
+  }
+}

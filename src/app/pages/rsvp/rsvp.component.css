@@ -1,0 +1,19 @@
+.container {
+  max-width: 600px;
+}
+
+.card {
+  border-radius: 10px;
+}
+
+.form-control {
+  border-radius: 8px;
+}
+
+.list-group-item {
+  cursor: pointer;
+}
+
+.list-group-item:hover {
+  background-color: #f8f9fa;
+}
