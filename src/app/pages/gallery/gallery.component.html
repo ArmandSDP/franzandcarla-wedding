@@ -1,15 +1,17 @@
-<section id="gallery" class="gallery-section py-5 text-center">
-  <div class="container">
-    <h2 class="fw-bold mb-4">Our Memories</h2>
+<section id="gallery" class="gallery-section text-white position-relative py-5">
+  <div class="container position-relative">
+    <h2 class="fw-bold mb-5">Our Memories</h2>
+
     <div class="row">
-      <div class="col-md-4 mb-3">
-        <img src="assets/gallery1.jpg" class="img-fluid rounded shadow" alt="Wedding Photo 1">
-      </div>
-      <div class="col-md-4 mb-3">
-        <img src="assets/gallery2.jpg" class="img-fluid rounded shadow" alt="Wedding Photo 2">
-      </div>
-      <div class="col-md-4 mb-3">
-        <img src="assets/gallery3.jpg" class="img-fluid rounded shadow" alt="Wedding Photo 3">
+      <div
+        class="col-sm-12 col-md-4 mb-4"
+        *ngFor="let id of [1, 2, 3, 4, 5, 6]"
+      >
+        <img
+          [src]="'assets/cf' + id + '.jpg'"
+          class="rounded shadow"
+          alt="Wedding Photo"
+        />
       </div>
     </div>
   </div>

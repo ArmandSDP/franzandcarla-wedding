@@ -14,21 +14,14 @@ export class RsvpComponent {
   rsvpStatus: string = '';
   name: string = '';
   stayingOver: string = '';
-  namesList: string[] = [
-    'John Doe',
-    'Jane Smith',
-    'Alex Johnson',
-    'Armand Dup',
-    'Hulda Vilj',
-    'Carla Dup',
-    'Franz Rutt',
-  ]; // Replace with actual guest list
+  namesList: string[] = [];
   filteredNames: string[] = [];
   existingRsvps: Set<string> = new Set(); // Store names that already RSVP’d
 
   constructor(private rsvpService: RsvpService) {}
 
   async ngOnInit() {
+    this.namesList = await this.rsvpService.getGuestList();
     this.existingRsvps = await this.rsvpService.getExistingRsvps();
   }
 
@@ -47,12 +40,21 @@ export class RsvpComponent {
     return this.namesList.includes(this.name);
   }
 
-  hasAlreadyRsvped(): boolean {
-    return this.existingRsvps.has(this.name);
-  }
 
   isFormValid(): boolean {
-    return this.isNameValid() && this.stayingOver !== '';
+    if (!this.isNameValid()) {
+      return false;
+    }
+
+    if (this.rsvpStatus === 'yes') {
+      return this.stayingOver !== '';
+    }
+
+    if (this.rsvpStatus === 'no') {
+      return true;
+    }
+
+    return false;
   }
 
   async submitRsvp() {
@@ -61,11 +63,12 @@ export class RsvpComponent {
       return;
     }
 
-    await this.rsvpService.addRSVP(
+    await this.rsvpService.addOrUpdateRSVP(
       this.name,
       this.rsvpStatus === 'yes',
       this.stayingOver === 'yes'
     );
+
     alert('Your RSVP has been submitted! 🎉');
 
     // Update the existing RSVP list to prevent re-submission

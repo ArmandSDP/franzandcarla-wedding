@@ -1,13 +1,40 @@
-<div class="container mt-5 mb-5">
+<div class="container mt-5 mb-5" id="rsvp">
   <div class="row justify-content-center">
     <div class="">
       <div class="card shadow p-4">
         <h2 class="text-center mb-4">RSVP for Franz & Carla's Wedding</h2>
 
         <form (ngSubmit)="submitRsvp()">
-          <!-- RSVP Yes/No -->
+          <!-- Name Input with Auto-Suggestions -->
           <div class="mb-3">
-            <label class="form-label d-block">Will you attend?</label>
+            <label for="name" class="form-label"
+              ><strong>Enter Your Name:</strong></label
+            >
+            <input
+              id="name"
+              type="text"
+              class="form-control"
+              [(ngModel)]="name"
+              [ngModelOptions]="{ standalone: true }"
+              (input)="filterNames()"
+              placeholder="Start typing..."
+            />
+            <ul class="list-group mt-2" *ngIf="filteredNames.length > 0">
+              <li
+                class="list-group-item list-group-item-action"
+                *ngFor="let suggestion of filteredNames"
+                (click)="selectName(suggestion)"
+              >
+                {{ suggestion }}
+              </li>
+            </ul>
+          </div>
+
+          <!-- RSVP Yes/No -->
+          <div class="mb-3" *ngIf="isNameValid()">
+            <label class="form-label d-block"
+              ><strong>Will you attend?</strong></label
+            >
             <div class="form-check form-check-inline">
               <input
                 class="form-check-input"
@@ -30,41 +57,10 @@
             </div>
           </div>
 
-          <!-- Name Input with Auto-Suggestions (ONLY If RSVP is "Yes") -->
-          <div class="mb-3" *ngIf="rsvpStatus === 'yes'">
-            <label for="name" class="form-label">Enter Your Name:</label>
-            <input
-              id="name"
-              type="text"
-              class="form-control"
-              [(ngModel)]="name"
-              [ngModelOptions]="{ standalone: true }"
-              (input)="filterNames()"
-              placeholder="Start typing..."
-            />
-            <ul class="list-group mt-2" *ngIf="filteredNames.length > 0">
-              <li
-                class="list-group-item list-group-item-action"
-                *ngFor="let suggestion of filteredNames"
-                (click)="selectName(suggestion)"
-              >
-                {{ suggestion }}
-              </li>
-            </ul>
-
-            <!-- Show warning if the name has already RSVP’d -->
-            <p class="text-danger mt-2" *ngIf="hasAlreadyRsvped()">
-              You have already submitted an RSVP.
-            </p>
-          </div>
-
-          <!-- Accommodation Question (Only if RSVP is Yes, Name is Entered, AND Name is Not Already RSVP’d) -->
-          <div
-            class="mb-3"
-            *ngIf="rsvpStatus === 'yes' && isNameValid() && !hasAlreadyRsvped()"
-          >
+          <!-- Accommodation Question (only if RSVP is Yes) -->
+          <div class="mb-3" *ngIf="rsvpStatus === 'yes' && isNameValid()">
             <label class="form-label d-block"
-              >Will you be staying at the venue?</label
+              ><strong>Will you be staying at the venue?</strong></label
             >
             <div class="form-check form-check-inline">
               <input
@@ -88,10 +84,10 @@
             </div>
           </div>
 
-          <!-- Submit Button (Only Enabled When Name Matches List AND Accommodation is Selected) -->
+          <!-- Submit Button -->
           <div class="d-grid">
             <button
-              class="btn btn-primary"
+              class="btn btn-secondary"
               type="submit"
               [disabled]="!isFormValid()"
             >

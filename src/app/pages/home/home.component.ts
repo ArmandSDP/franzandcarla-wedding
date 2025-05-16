@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
 @Component({
@@ -8,4 +8,24 @@ import { CommonModule } from '@angular/common';
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.css'],
 })
-export class HomeComponent {}
+export class HomeComponent implements OnInit {
+  ngOnInit(): void {
+    const navLinks = document.querySelectorAll('.nav-link');
+
+    navLinks.forEach((link) => {
+      link.addEventListener('click', () => {
+        const navbarToggler = document.querySelector(
+          '.navbar-toggler'
+        ) as HTMLElement;
+        const collapseElement = document.querySelector('.navbar-collapse');
+
+        if (
+          window.innerWidth < 992 &&
+          collapseElement?.classList.contains('show')
+        ) {
+          navbarToggler?.click(); // Trigger Bootstrap's collapse animation
+        }
+      });
+    });
+  }
+}

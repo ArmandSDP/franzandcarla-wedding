@@ -1,28 +1,17 @@
-.rsvp-container {
-  max-width: 400px;
-  margin: auto;
-  padding: 20px;
-  text-align: center;
+body {
+  scroll-behavior: smooth;
 }
 
-input, button {
-  width: 100%;
-  padding: 10px;
-  margin: 5px 0;
+.navbar {
+  z-index: 1000;
 }
 
-ul {
-  list-style-type: none;
-  padding: 0;
-  background: #eee;
-  border-radius: 5px;
+.nav-link {
+  font-weight: 500;
+  margin-left: 1rem;
 }
 
-li {
-  padding: 10px;
-  cursor: pointer;
-}
-
-li:hover {
-  background: #ddd;
+.navbar-brand {
+  font-size: 1.5rem;
+  font-weight: bold;
 }

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HomeComponent } from './pages/home/home.component';
 import { RsvpComponent } from './pages/rsvp/rsvp.component';
-import { TravelComponent } from './pages/travel/travel.component';
+import { AccommodationComponent } from './pages/accommodation/accommodation.component';
 import { DetailsComponent } from './pages/details/details.component';
 import { GalleryComponent } from './pages/gallery/gallery.component';
 
@@ -12,7 +12,7 @@ import { GalleryComponent } from './pages/gallery/gallery.component';
   imports: [
     HomeComponent,
     RsvpComponent,
-    TravelComponent,
+    AccommodationComponent,
     DetailsComponent,
     GalleryComponent,
   ],

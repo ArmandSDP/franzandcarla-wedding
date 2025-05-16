@@ -1,0 +1,81 @@
+section {
+  background: #ffffff;
+  background-size: cover;
+  background-image: "url(assets/vanue-photo-1.jpg)";
+  padding: 4rem 0;
+  text-align: center;
+  font-family: "Playfair Display", serif;
+
+  h2 {
+    color: #792a2a; /* same rust red */
+    font-size: 2.7rem;
+    margin-bottom: 3rem;
+  }
+
+  .row {
+    margin-top: 2rem;
+  }
+
+  .col-md-6 {
+    padding: 1.5rem;
+    background: #ffffff;
+    border-radius: 8px;
+  }
+
+  .btn {
+    margin-top: 1rem;
+  }
+}
+
+.accommodation-section .card {
+  border: none;
+  border-radius: 12px;
+  overflow: hidden;
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+  background-color: rgba(136, 145, 118, 0.13);
+}
+
+.accommodation-section .card:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 20px rgba(0, 0, 0, 0.15);
+}
+
+.accommodation-section .card-title {
+  font-size: 1.6rem;
+  color: #792a2a;
+  margin-bottom: 1.25rem;
+  position: relative;
+}
+
+.accommodation-section hr {
+  content: "";
+  display: block;
+  width: auto;
+  height: 2px;
+  background-color: #792a2a;
+  margin: 0.5rem auto 0;
+  margin-bottom: 1.5rem;
+}
+
+.accommodation-section .card-text,
+.accommodation-section li,
+.accommodation-section p {
+  font-size: 1.1rem;
+  color: #5a5a5a;
+}
+
+.accommodation-section ul {
+  padding-left: 0;
+  list-style: none;
+}
+
+.accommodation-section .btn {
+  margin-top: 1rem;
+  font-weight: 500;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+}
+
+.accommodation-section .accommodation-img {
+  padding: 0;
+}

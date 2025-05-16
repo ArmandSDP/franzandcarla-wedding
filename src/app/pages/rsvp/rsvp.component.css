@@ -15,5 +15,15 @@
 }
 
 .list-group-item:hover {
-  background-color: #f8f9fa;
+  background-color: #465666;
+}
+
+input[type="radio"] {
+  transform: scale(1.25);
+  margin-right: 8px;
+}
+
+h2 {
+  color: #792a2a; /* same rust red */
+  margin-bottom: 3rem;
 }

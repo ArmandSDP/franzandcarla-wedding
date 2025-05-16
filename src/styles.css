@@ -1,1 +1,41 @@
-/* You can add global styles to this file, and also import other style files */
+/* Global Styles */
+
+section {
+  scroll-margin-top: 50px; /* Adjust if your navbar is taller */
+}
+
+body {
+  font-family: "Playfair Display", serif;
+  background: rgb(136, 145, 118);
+  color: #333333;
+}
+
+/* Fonts */
+.script-font {
+  font-family: "Satisfy", cursive;
+}
+
+/* Brand Colors */
+.rust {
+  color: #792a2a; /* header text */
+}
+
+.rust-dark {
+  color: #5f2020; /* icon color or strong accents */
+}
+
+.text-soft {
+  color: #555555; /* paragraph/subtext */
+}
+
+/* Optional: button classes if you want matching buttons */
+.btn-rust {
+  background-color: #792a2a;
+  color: #fff;
+  border: none;
+}
+
+.btn-rust:hover {
+  background-color: #5f2020;
+}
+

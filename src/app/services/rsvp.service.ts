@@ -5,8 +5,11 @@ import {
   addDoc,
   getDocs,
   collectionData,
+  query,
+  doc,
+  where,
+  setDoc,
 } from '@angular/fire/firestore';
-import { query, where } from 'firebase/firestore';
 import { Observable } from 'rxjs';
 
 @Injectable({
@@ -14,9 +17,11 @@ import { Observable } from 'rxjs';
 })
 export class RsvpService {
   private rsvpCollection;
+  private guestsCollection;
 
   constructor(private firestore: Firestore) {
-    this.rsvpCollection = collection(this.firestore, 'RSVP'); // Now initialized in the constructor
+    this.rsvpCollection = collection(this.firestore, 'RSVP');
+    this.guestsCollection = collection(this.firestore, 'Guests');
   }
 
   // Fetch all existing RSVPs and store them in a Set
@@ -25,18 +30,40 @@ export class RsvpService {
     return new Set(snapshot.docs.map((doc) => doc.data()['name']));
   }
 
-  // Add RSVP to Firestore
-  async addRSVP(name: string, attending: boolean, staying: boolean) {
-    return await addDoc(this.rsvpCollection, {
-      name,
-      attending,
-      staying,
-      timestamp: new Date(),
-    });
+  // ✅ NEW: Add or Update RSVP
+  async addOrUpdateRSVP(name: string, attending: boolean, staying: boolean) {
+    // Search if RSVP already exists
+    const q = query(this.rsvpCollection, where('name', '==', name));
+    const querySnapshot = await getDocs(q);
+
+    if (!querySnapshot.empty) {
+      // Update the existing RSVP
+      const docRef = querySnapshot.docs[0].ref;
+      await setDoc(docRef, {
+        name,
+        attending,
+        staying,
+        timestamp: new Date(),
+      });
+    } else {
+      // Otherwise, add a new RSVP
+      await addDoc(this.rsvpCollection, {
+        name,
+        attending,
+        staying,
+        timestamp: new Date(),
+      });
+    }
   }
 
   // Fetch all RSVPs (optional)
   getRSVPs(): Observable<any[]> {
-    return collectionData(this.rsvpCollection, { idField: 'id' }); // Real-time data fetching
+    return collectionData(this.rsvpCollection, { idField: 'id' });
+  }
+
+  // 🆕 Fetch all guest names from the Guests collection
+  async getGuestList(): Promise<string[]> {
+    const snapshot = await getDocs(this.guestsCollection);
+    return snapshot.docs.map((doc) => doc.data()['NameAndSurname']);
   }
 }
