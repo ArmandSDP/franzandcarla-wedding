@@ -77,5 +77,10 @@ section {
 }
 
 .accommodation-section .accommodation-img {
-  padding: 0;
+  padding: 0 !important;
+}
+
+.venuephoto {
+  padding-left: 0.5rem !important;
+  padding-right: 0.5rem !important;
 }
